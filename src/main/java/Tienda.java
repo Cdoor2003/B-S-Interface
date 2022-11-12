@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Tienda {
     private String nombreTienda;
-    private ArrayList<Producto> listaProductos;
+    private static ArrayList<Producto> listaProductos;
 
     public Tienda(String nombreTienda){
         this.nombreTienda = nombreTienda;
@@ -23,6 +23,7 @@ public class Tienda {
 
     public Producto buscarProducto(String nombre) {
         Producto producto;
+        GestorDatos.leerArchivoProductos();
         if(listaProductos.equals(nombre)){
             producto = (Producto) listaProductos.get(Integer.parseInt(nombre));
             System.out.println("\n El articulo ha sido encontrado");
@@ -62,7 +63,7 @@ public class Tienda {
         this.nombreTienda = nombreTienda;
     }
 
-    public ArrayList<Producto> getListaProductos() {
+    public static ArrayList<Producto> getListaProductos() {
         return listaProductos;
     }
 

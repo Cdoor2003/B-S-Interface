@@ -12,7 +12,7 @@ public class MenuPropietario {
         System.out.println("Seleccione una de las opciones anteriores");
     }
 
-    public void salirMenu() {
+    public void salirMenuPropietario() {
         System.out.println("\n Ha salido del menu");
     }
 
@@ -63,7 +63,7 @@ public class MenuPropietario {
                         System.err.println("Opción ingresada no valida, por favor intente de nuevo");
                     }
                 }while (opcion != 3) ;
-                salirMenu();
+                salirMenuPropietario();
             } else {
                 System.out.println("Contraseña incorrecta");
                 auxiliar = "";

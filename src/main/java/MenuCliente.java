@@ -11,7 +11,7 @@ public class MenuCliente {
         System.out.println("Seleccione una de las opciones anteriores");
     }
 
-    public void salirMenu() {
+    public void salirMenuCliente() {
         System.out.println("\n Ha salido del menu");
     }
 
@@ -29,7 +29,7 @@ public class MenuCliente {
                 }
                 switch (opcion){
                     case 1:{
-                        GestorDatos.leerArchivoProductos(tienda,"Productos.txt");
+                        GestorDatos.leerArchivoProductos();
                         tienda.mostrarProductos();
                         break;
                     }
@@ -45,14 +45,15 @@ public class MenuCliente {
                         break;
                     }
                     case 3:{
+                        int cantidad;
+                        double vendido;
                         String nombreProducto;
                         teclado.nextLine();
                         System.out.println("Ingrese el nombre del producto que desea comprar : ");
                         nombreProducto = teclado.nextLine();
                         System.out.println("Ingrese la cantidad que desea comprar : ");
-                        int cantidad = teclado.nextInt();
-
-                        double vendido = tienda.venderProducto(nombreProducto,cantidad);
+                        cantidad = teclado.nextInt();
+                        vendido = tienda.venderProducto(nombreProducto,cantidad);
                         if(vendido != 0 && vendido != 1){
                             System.out.println("El precio de la compra es de : "+vendido+"$.\n");
                         }
@@ -64,6 +65,6 @@ public class MenuCliente {
                 System.err.println("Opción ingresada no valida, por favor intente de nuevo");
             }
         }while(opcion != 4);
-        salirMenu();
+        salirMenuCliente();
     }
 }
