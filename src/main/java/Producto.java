@@ -33,17 +33,6 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
-    public boolean vendido(int numero) {
-        if(numero <= cantidad){
-            numero -= cantidad;
-        }
-        else {
-            System.out.println("No hay suficientes productos");
-            return false;
-        }
-        return true;
-    }
-
     public String toString() {
         return this.nombre+","+this.precioUnidad+","+this.cantidad;
     }

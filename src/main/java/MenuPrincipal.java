@@ -15,14 +15,14 @@ public class MenuPrincipal {
     }
     public void opcionesMenuPrincipal() throws IOException {
         Scanner teclado = new Scanner(System.in);
+        Tienda tienda = new Tienda();
         MenuCliente menuCliente = new MenuCliente();
         MenuPropietario menuPropietario = new MenuPropietario();
         int opcion = 0;
         String nuevaContraseña;
-        nuevaContraseña = menuPropietario.leerContraseña("Contraseña.txt");
+        nuevaContraseña = tienda.leerContraseña("Contraseña.txt");
         do{
-            if(menuPropietario.getContraseña() != null){
-                do{
+            if(tienda.getContraseña() != null){
                     try{
                         mostrarMenuPrincipal();
                         opcion = teclado.nextInt();
@@ -32,11 +32,32 @@ public class MenuPrincipal {
                         }
                         switch (opcion){
                             case 1: {
-                                menuPropietario.opcionesMenuPropietario();
+                                int contador = 0;
+                                do{
+                                    String auxiliar;
+                                    System.out.println("Ingrese la contraseña : ");
+                                    auxiliar = teclado.next();
+                                    tienda.setContraseña(tienda.leerContraseña("Contraseña.txt"));
+                                    if (tienda.getContraseña().equals(auxiliar)) {
+                                        menuPropietario.opcionesMenuPropietario();
+                                        break;
+                                    } else {
+                                        contador++;
+                                        if(contador != 3){
+                                            System.out.println("La contraseña no coincide, intente de nuevo (Tiene "+(3-contador)+" oportunidades)");
+                                        }else {
+                                            System.out.println("La contraseña no coincide");
+                                        }
+                                    }
+                                }while(contador < 3);
                                 break;
                             }
                             case 2:{
                                 menuCliente.opcionesMenuCliente();
+                                break;
+                            }
+                            case 3:{
+                                salirMenuPrincipal();
                                 break;
                             }
                         }
@@ -44,15 +65,13 @@ public class MenuPrincipal {
                         teclado.nextLine();
                         System.err.println("Opción ingresada no valida, por favor intente de nuevo");
                     }
-                }while(opcion != 3);
-                salirMenuPrincipal();
             }else{
                 do{
                     System.out.println("Ingrese la contraseña para poder ingresar al menú propietario : ");
                     nuevaContraseña = teclado.nextLine();
-                    menuPropietario.setContraseña(nuevaContraseña);
-                    menuPropietario.guardarContraseña(nuevaContraseña);
-                }while(menuPropietario.getContraseña() == null);
+                    tienda.setContraseña(nuevaContraseña);
+                    tienda.guardarContraseña(nuevaContraseña);
+                }while(tienda.getContraseña() == null);
             }
         }while (opcion != 3);
     }
